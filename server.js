@@ -1,13 +1,19 @@
 var express = require("express");
+var logger = require("morgan");
+var mongoose = require("mongoose");
 
 var PORT = process.env.PORT || 8080;
 
 var app = express();
 
+var db = require("./models");
+
 app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(logger("dev"));
 
 var exphbs = require("express-handlebars");
 
@@ -19,8 +25,54 @@ var routes = require("./controllers/scraper_controller.js");
 
 app.use(routes);
 
-// Start our server so that it can begin listening to client requests.
+mongoose.connect("mongodb://localhost/chessdb", { useNewUrlParser: true });
+
+var cheerio = require("cheerio");
+var axios = require("axios");
+
+console.log("\n***************\n" +
+    "Here is the data from Chess.com" +
+    "\n***************\n");
+
+app.get("/scrape", function (req, res) {
+
+    axios.get("https://www.chess.com").then(function (response) {
+
+        var $ = cheerio.load(response.data);
+
+
+        $("h2.post-preview-titlecontainer").each(function (i, element) {
+
+            var result = {};
+
+            result.title = $(this)
+                .parent()
+                .find("a")
+                .attr("title");
+            result.link = $(this)
+                .find("a")
+                .attr("href");
+            result.image = $(this)
+                .parent()
+                .find("img")
+                .attr("src");
+
+            db.Article.create(result)
+                .then(function (dbArticle) {
+                    // View the added result in the console
+                    console.log(dbArticle);
+                })
+                .catch(function (err) {
+                    // If an error occurred, log it
+                    console.log(err);
+                });
+        });
+        res.send("Scrape Complete!");
+    });
+});
+
+
 app.listen(PORT, function () {
-    // Log (server-side) when our server has started
+
     console.log("Server listening on: http://localhost:" + PORT);
 });
