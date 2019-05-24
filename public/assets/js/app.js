@@ -14,41 +14,44 @@ $.getJSON("/articles", function (data) {
 
 $(document).on("click", "#scrape", function () {
     alert("working");
-    axios.get("https://www.chess.com").then(function (response) {
+    app.get("/scrape", function (req, res) {
 
-        var $ = cheerio.load(response.data);
+        axios.get("https://www.chess.com").then(function (response) {
+
+            var $ = cheerio.load(response.data);
 
 
-        $("h2.post-preview-titlecontainer").each(function (i, element) {
+            $("h2.post-preview-titlecontainer").each(function (i, element) {
 
-            var result = {};
+                var result = {};
 
-            result.title = $(this)
-                .parent()
-                .find("a")
-                .attr("title");
-            result.link = $(this)
-                .find("a")
-                .attr("href");
-            result.image = $(this)
-                .parent()
-                .find("img")
-                .attr("src");
-            result.summary = $(this)
-                .parent()
-                .find("p")
-                .text().trim();
+                result.title = $(this)
+                    .parent()
+                    .find("a")
+                    .attr("title");
+                result.link = $(this)
+                    .find("a")
+                    .attr("href");
+                result.image = $(this)
+                    .parent()
+                    .find("img")
+                    .attr("src");
+                result.summary = $(this)
+                    .parent()
+                    .find("p")
+                    .text().trim();
 
-            db.Article.create(result)
-                .then(function (dbArticle) {
+                db.Article.create(result)
+                    .then(function (dbArticle) {
 
-                    console.log(dbArticle);
-                })
-                .catch(function (err) {
+                        console.log(dbArticle);
+                    })
+                    .catch(function (err) {
 
-                    console.log(err);
-                });
+                        console.log(err);
+                    });
+            });
+            res.send("Scrape Complete!");
         });
-        res.send("Scrape Complete!");
     });
 });
