@@ -25,7 +25,7 @@ var routes = require("./controllers/scraper_controller.js");
 
 app.use(routes);
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/chessdb";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI);
 
 var cheerio = require("cheerio");
