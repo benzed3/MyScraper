@@ -56,19 +56,36 @@ app.get("/scrape", function (req, res) {
                 .parent()
                 .find("img")
                 .attr("src");
+            result.summary = $(this)
+                .parent()
+                .find("p")
+                .text().trim();
 
             db.Article.create(result)
                 .then(function (dbArticle) {
-                    // View the added result in the console
+
                     console.log(dbArticle);
                 })
                 .catch(function (err) {
-                    // If an error occurred, log it
+
                     console.log(err);
                 });
         });
         res.send("Scrape Complete!");
     });
+});
+
+app.get("/articles", function (req, res) {
+
+    db.Article.find({})
+        .then(function (dbArticle) {
+
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+
+            res.json(err);
+        });
 });
 
 
