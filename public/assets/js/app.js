@@ -14,7 +14,7 @@ $.getJSON("/articles", function (data) {
 
 $(document).on("click", "#scrape", function () {
     alert("working");
-    $.getJSON("/articles", function (data) {
+    $.getJSON("/scrape", function (data) {
 
         for (var i = 0; i < data.length; i++) {
 
