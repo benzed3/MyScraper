@@ -2,6 +2,22 @@ body {
     background: bisque;
 }
 
-h1 {
+#head {
+    text-align: center;
+    background: brown;
+    padding: 10px 0 10px 0;
+    color: white;
     font-family: 'Oswald', sans-serif;
+}
+
+#articles {
+    font-family: 'Oswald', sans-serif;
+    color: gray;
+}
+
+button {
+    color: red;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
 }
