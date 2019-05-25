@@ -32,10 +32,14 @@ var cheerio = require("cheerio");
 var axios = require("axios");
 
 console.log("\n***************\n" +
-    "Here is the data from Chess.com" +
+    "Welcome to the Chess.com Scraper" +
     "\n***************\n");
 
 app.get("/scrape", function (req, res) {
+
+    console.log("\n***************\n" +
+        "Here is the data from Chess.com" +
+        "\n***************\n");
 
     axios.get("https://www.chess.com").then(function (response) {
 
@@ -79,6 +83,21 @@ app.get("/scrape", function (req, res) {
 app.get("/articles", function (req, res) {
 
     db.Article.find({})
+        .then(function (dbArticle) {
+
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+
+            res.json(err);
+        });
+});
+
+app.get("/articles/:id", function (req, res) {
+
+    db.Article.findOne({ _id: req.params.id })
+
+        .populate("note")
         .then(function (dbArticle) {
 
             res.json(dbArticle);

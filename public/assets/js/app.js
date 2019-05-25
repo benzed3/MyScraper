@@ -28,19 +28,47 @@ $(document).on("click", "#scrape", function () {
                 "<u>Link</u>: " + data[i].link + "<br />" +
                 "<u>Image</u>: " + data[i].image + "<br />" +
                 "<u>Summary</u>: " + data[i].summary +
-                "</p><button id='saveNote'>Add Note and Save</button><hr>");
+                "</p><button id='saveArt'>Save Article</button><hr>");
         }
     });
 
 });
 
-$(document).on("click", "#saved", function () {
+$(document).on("click", "#saveArt", function () {
     alert("Saved!");
+
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+
+            title: $(this).title,
+            link: $(this).link,
+            image: $(this).image,
+            summary: $(this).summary
+        }
+    })
+        .then(function (data) {
+            console.log(data);
+
+            $("#new").append("<p data-id='" +
+                data._id + "'>" +
+                data.title + "<br />" +
+                data.link + "<br />" +
+                data.image + "<br />" +
+                data.summary +
+                "</p>");
+
+        });
 
 });
 
+$(document).on("click", "saved")
+
 $(document).on("click", "#clear", function () {
-    alert("Cleared!");
+
     $("#content").empty();
     $("#content").html("<h2>Oops!! No articles!!</h2>");
 })
