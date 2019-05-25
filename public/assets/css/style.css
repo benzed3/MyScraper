@@ -10,14 +10,39 @@ body {
     font-family: 'Oswald', sans-serif;
 }
 
-#articles {
+h2 {
     font-family: 'Oswald', sans-serif;
     color: gray;
 }
 
-button {
+#content {
+    font-family: 'Oswald', sans-serif;
+    color: gray;
+}
+
+#scrape {
     color: red;
     background: white;
     padding: 10px;
     border-radius: 8px;
+}
+
+#saved {
+    color: red;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#clear {
+    color: red;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#saveNote {
+    color: white;
+    background: tan;
+    border-radius: 5px;
 }
