@@ -1,19 +1,7 @@
-$.getJSON("/articles", function (data) {
-
-    for (var i = 0; i < data.length; i++) {
-
-        $("#content").append("<p data-id='" +
-            data[i]._id + "'>" +
-            "<u>Title</u>: " + data[i].title + "<br />" +
-            "<u>Link</u>: " + data[i].link + "<br />" +
-            "<u>Image</u>: " + data[i].image + "<br />" +
-            "<u>Summary</u>: " + data[i].summary +
-            "</p><button id='saveNote'>Add Note and Save</button><hr>");
-    }
-});
 
 $(document).on("click", "#scrape", function () {
     alert("Scraped!");
+    $("#content").empty();
     $.ajax({
         method: "GET",
         url: "/scrape"
@@ -30,10 +18,25 @@ $(document).on("click", "#scrape", function () {
                     "</p>");
             }
         });
+    $.getJSON("/articles", function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+
+            $("#content").append("<p data-id='" +
+                data[i]._id + "'>" +
+                "<u>Title</u>: " + data[i].title + "<br />" +
+                "<u>Link</u>: " + data[i].link + "<br />" +
+                "<u>Image</u>: " + data[i].image + "<br />" +
+                "<u>Summary</u>: " + data[i].summary +
+                "</p><button id='saveNote'>Add Note and Save</button><hr>");
+        }
+    });
+
 });
 
-$(document).on("click", "#save", function () {
+$(document).on("click", "#saved", function () {
     alert("Saved!");
+
 });
 
 $(document).on("click", "#clear", function () {
