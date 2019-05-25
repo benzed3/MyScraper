@@ -65,11 +65,9 @@ $(document).on("click", "#saveArt", function () {
 
 });
 
-$(document).on("click", "saved")
-
 $(document).on("click", "#clear", function () {
 
     $("#content").empty();
-    $("#content").html("<h2>Oops!! No articles!!</h2>");
+    $("#content").html("<h3>Oops!! No articles!!</h3>");
 })
 
