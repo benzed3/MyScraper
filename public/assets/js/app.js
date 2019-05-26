@@ -28,16 +28,16 @@ $(document).on("click", "#scrape", function () {
                 "<u>Link</u>: " + data[i].link + "<br />" +
                 "<u>Image</u>: " + data[i].image + "<br />" +
                 "<u>Summary</u>: " + data[i].summary +
-                "</p><button id='saveArt'>Save Article</button><hr>");
+                "</p><p id=endText>Click on Title of the Article to Save!</p><hr>");
         }
     });
 
 });
 
-$(document).on("click", "#saveArt", function () {
+$(document).on("click", "p", function () {
     alert("Saved!");
 
-    var thisId = $("#saveArt").parent().find("p").attr("data-id");
+    var thisId = $(this).attr("data-id");
 
     $.ajax({
         method: "POST",
@@ -54,16 +54,18 @@ $(document).on("click", "#saveArt", function () {
             console.log(data);
 
             $("#new").append("<p data-id='" +
-                data._id + "'>" +
+                thisId + "'>" +
                 "<u>Title</u>: " + data.title + "<br />" +
                 "<u>Link</u>: " + data.link + "<br />" +
                 "<u>Image</u>: " + data.image + "<br />" +
                 "<u>Summary</u>: " + data.summary +
-                "</p>");
+                "</p><button id='addNote'>Add Note</button><button id='clearArt'>Clear Article</button><hr>");
 
         });
 
 });
+
+
 
 $(document).on("click", "#clear", function () {
 
