@@ -37,7 +37,7 @@ $(document).on("click", "#scrape", function () {
 $(document).on("click", "#saveArt", function () {
     alert("Saved!");
 
-    var thisId = $(this).attr("data-id");
+    var thisId = $("#saveArt").parent().find("p").attr("data-id");
 
     $.ajax({
         method: "POST",
@@ -55,10 +55,10 @@ $(document).on("click", "#saveArt", function () {
 
             $("#new").append("<p data-id='" +
                 data._id + "'>" +
-                data.title + "<br />" +
-                data.link + "<br />" +
-                data.image + "<br />" +
-                data.summary +
+                "<u>Title</u>: " + data.title + "<br />" +
+                "<u>Link</u>: " + data.link + "<br />" +
+                "<u>Image</u>: " + data.image + "<br />" +
+                "<u>Summary</u>: " + data.summary +
                 "</p>");
 
         });
@@ -69,5 +69,10 @@ $(document).on("click", "#clear", function () {
 
     $("#content").empty();
     $("#content").html("<h3>Oops!! No articles!!</h3>");
+})
+
+$(document).on("click", "#clearSaved", function () {
+
+    $("#new").empty();
 })
 
