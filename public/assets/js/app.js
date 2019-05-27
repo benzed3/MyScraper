@@ -53,13 +53,7 @@ $(document).on("click", "p", function () {
         .then(function (data) {
             console.log(data);
 
-            $("#new").append("<p data-id='" +
-                thisId + "'>" +
-                "<u>Title</u>: " + data.title + "<br />" +
-                "<u>Link</u>: " + data.link + "<br />" +
-                "<u>Image</u>: " + data.image + "<br />" +
-                "<u>Summary</u>: " + data.summary + "</p>"
-            );
+            $("#new").append("<h4>" + data.title + "</h4>")
             $("#new").append("<input id='titleinput' name='title' ><br>");
             $("#new").append("<textarea id='bodyinput' name='body'></textarea><br>");
             $("#new").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");

@@ -20,6 +20,11 @@ h3 {
     color: gray;
 }
 
+h4 {
+    font-family: 'Oswald', sans-serif;
+    color: brown;
+}
+
 #content {
     font-family: 'Oswald', sans-serif;
     color: gray;
