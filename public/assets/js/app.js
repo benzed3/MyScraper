@@ -53,15 +53,15 @@ $(document).on("click", "p", function () {
         .then(function (data) {
             console.log(data);
 
-            $("#new").append("<h4>" + data.title + "</h4>")
+            $("#new").append("<h4>" + data.title + "</h4>");
+            $("#new").append("<h5>Summary: " + data.summary + "</h5>");
             $("#new").append("<input id='titleinput' name='title' ><br>");
             $("#new").append("<textarea id='bodyinput' name='body'></textarea><br>");
             $("#new").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
             if (data.note) {
-                // Place the title of the note in the title input
+
                 $("#titleinput").val(data.note.title);
-                // Place the body of the note in the body textarea
                 $("#bodyinput").val(data.note.body);
             }
 
@@ -82,3 +82,24 @@ $(document).on("click", "#clearSaved", function () {
     $("#new").empty();
 })
 
+$(document).on("click", "#savenote", function () {
+
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+            title: $("#titleinput").val(),
+            body: $("#bodyinput").val()
+        }
+    })
+        .then(function (data) {
+            console.log(data);
+            $("#new").empty();
+        });
+
+
+    $("#titleinput").val("");
+    $("#bodyinput").val("");
+});

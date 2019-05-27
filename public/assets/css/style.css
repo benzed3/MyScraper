@@ -25,6 +25,11 @@ h4 {
     color: brown;
 }
 
+h5 {
+    font-family: 'Oswald', sans-serif;
+    color: gray;
+}
+
 #content {
     font-family: 'Oswald', sans-serif;
     color: gray;
