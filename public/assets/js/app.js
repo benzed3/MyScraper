@@ -28,7 +28,7 @@ $(document).on("click", "#scrape", function () {
                 "<u>Link</u>: " + data[i].link + "<br />" +
                 "<u>Image</u>: " + data[i].image + "<br />" +
                 "<u>Summary</u>: " + data[i].summary +
-                "</p><p id=endText>Click on Title of the Article to Save!</p><hr>");
+                "</p><p id=endText>Click on Title of the Article ONLY to Save!</p><hr>");
         }
     });
 
@@ -58,8 +58,18 @@ $(document).on("click", "p", function () {
                 "<u>Title</u>: " + data.title + "<br />" +
                 "<u>Link</u>: " + data.link + "<br />" +
                 "<u>Image</u>: " + data.image + "<br />" +
-                "<u>Summary</u>: " + data.summary +
-                "</p><button id='addNote'>Add Note</button><button id='clearArt'>Clear Article</button><hr>");
+                "<u>Summary</u>: " + data.summary + "</p>"
+            );
+            $("#new").append("<input id='titleinput' name='title' ><br>");
+            $("#new").append("<textarea id='bodyinput' name='body'></textarea><br>");
+            $("#new").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+
+            if (data.note) {
+                // Place the title of the note in the title input
+                $("#titleinput").val(data.note.title);
+                // Place the body of the note in the body textarea
+                $("#bodyinput").val(data.note.body);
+            }
 
         });
 

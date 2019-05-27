@@ -46,7 +46,13 @@ h3 {
     border-radius: 8px;
 }
 
-#saveArt {
+#savenote {
+    color: white;
+    background: tan;
+    border-radius: 5px;
+}
+
+#clearnote {
     color: white;
     background: tan;
     border-radius: 5px;
