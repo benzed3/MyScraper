@@ -62,6 +62,12 @@ h5 {
     border-radius: 5px;
 }
 
+#delete {
+    color: white;
+    background: tan;
+    border-radius: 5px;
+}
+
 #clearnote {
     color: white;
     background: tan;

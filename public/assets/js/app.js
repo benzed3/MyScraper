@@ -57,7 +57,8 @@ $(document).on("click", "p", function () {
             $("#new").append("<h5>Summary: " + data.summary + "</h5>");
             $("#new").append("<input id='titleinput' name='title' ><br>");
             $("#new").append("<textarea id='bodyinput' name='body'></textarea><br>");
-            $("#new").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+            $("#new").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button><button data-id='" +
+                data._id + "' id='delete'>Clear Article</button>");
 
             if (data.note) {
 
@@ -96,10 +97,17 @@ $(document).on("click", "#savenote", function () {
     })
         .then(function (data) {
             console.log(data);
-            $("#new").empty();
         });
 
 
     $("#titleinput").val("");
     $("#bodyinput").val("");
+    alert("note added");
+});
+
+$(document).on("click", "#delete", function () {
+    alert("Article Deleted");
+
+    var a = $(this).attr("data-id");
+    $("#new").empty(a);
 });
